@@ -1,0 +1,15 @@
+[{
+	"genes": {
+		"Name": "APEX1",
+		"Length": 2542,
+		"Accession": "NC_000014"
+	}
+}, {
+	"Name": "BUB3",
+	"Length": 16066,
+	"Accession": "NC_000010"
+}, {
+	"Name": "CLU",
+	"Length": 17784,
+	"Accession": "NC_000008"
+}]
