@@ -1,0 +1,232 @@
+{
+    "object_id": "https://biocomputeobject.org/BCO_000284/DRAFT",
+    "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+    "etag": "",
+    "provenance_domain": {
+        "name": "Identification of BCL-2 interaction partners containing the BH-3 motif",
+        "version": "3.0",
+        "created": "2022-12-06T19:51:58.696Z",
+        "modified": "2022-12-12T02:14:49.959Z",
+        "embargo": {
+            "start_time": "",
+            "end_time": ""
+        },
+        "contributors": [
+            {
+                "contribution": [
+                    "createdBy"
+                ],
+                "name": "Hannah Herzon",
+                "email": "herzonh@gwu.edu",
+                "affiliation": "George Washington University",
+                "orcid": "None"
+            },
+            {
+                "name": "Simon Mathis Kønig",
+                "contribution": [
+                    "authoredBy"
+                ],
+                "affiliation": "Computational Biology Laboratory, Danish Cancer Society Research Center, Copenhagen, Denmark",
+                "email": "not provided",
+                "orcid": "None"
+            },
+            {
+                "name": "Vendela Rissler",
+                "contribution": [
+                    "createdBy"
+                ],
+                "affiliation": "Computational Biology Laboratory, Danish Cancer Society Research Center, Copenhagen, Denmark",
+                "email": "not provided",
+                "orcid": "None"
+            },
+            {
+                "name": "Thilde Terkelsen",
+                "contribution": [
+                    "createdBy"
+                ],
+                "affiliation": "Computational Biology Laboratory, Danish Cancer Society Research Center, Copenhagen, Denmark",
+                "email": "not provided",
+                "orcid": "None"
+            },
+            {
+                "name": "Matteo Lambrughi",
+                "contribution": [
+                    "createdBy"
+                ],
+                "affiliation": "Computational Biology Laboratory, Danish Cancer Society Research Center, Copenhagen, Denmark",
+                "email": "not provided",
+                "orcid": "None"
+            },
+            {
+                "name": "Elena Papaleo",
+                "contribution": [
+                    "createdBy"
+                ],
+                "affiliation": "Computational Biology Laboratory, Danish Cancer Society Research Center, Copenhagen, Denmark, Translational Disease Systems Biology, Faculty of Health and Medical Sciences, Novo Nordisk Foundation Center for Protein Research University of Copenhagen, Copenhagen, Denmark",
+                "email": "elenap@cancer.dk",
+                "orcid": "http://orcid.org/0000-0002-7376-5894"
+            }
+        ],
+        "license": "https://raw.githubusercontent.com/ELELAB/bcl_bh3only_breast_cancer/master/LICENSE"
+    },
+    "usability_domain": [
+        "Apoptosis is an important process for maintaining homeostasis, eliminating cells that have been damaged beyond repair, and preventing cancer. If there is a problem with apoptosis, it could lead to uncontrolled cell proliferation and development of a tumor. ",
+        "Proteins of the B-cell lymphoma-2 (Bcl-2) family are known to regulate programmed cell death through the mitochondrial apoptosis pathway. They are therefore considered pro-survival proteins given that a major characteristic of cancer is its ability to avoid programmed cell death. This makes them a therapeutic target for drug discovery. When there is intracellular stress, the apoptotic homeostasis is controlled by the activator and sensitizer BH3 (Bcl-2 homology 2)-only proteins. Changes in expression levels of these proteins can lead to an imbalance. More specifically, overexpression can cause oncogenic effects. Normally, the Bcl-2 family proteins will bind to the BH3 motif of pro-apoptotic proteins to create a network of protein-protein interactions, but any dysfunction will result in the cancer cells to evade cell death. This study emphasizes the importance of future experimental research on the protein network between Bcl-2 and BH3 within a breast cancer context.",
+        "Bioinformatic approaches were done in order to link -omics with structural data. There was no change in the parameters from the default. This BCO represents the steps taken to identify protein interaction partners of the Bcl-2 family members that contain the BH3 motif in breast cancer samples. This was done by first retrieving the experimentally known Bcl-2 family interactions from the human Integrated Interaction Database (IID), and then the interaction list was filtered to only include those proteins containing the BH3 motif. Out of the 560 protein-protein interactions that were collected, 295 of them were selected as possible BH3-containing proteins. Out of the 295 proteins, 282 were identified as BH-3 only. "
+    ],
+    "description_domain": {
+        "keywords": [
+            "Bcl-2 family member",
+            "BH3 motif",
+            "interaction partners"
+        ],
+        "platform": [],
+        "pipeline_steps": [
+            {
+                "step_number": "1",
+                "name": "Retrieve known interactions partners of the Bcl-2 family members ",
+                "description": "The experimentally known protein interaction partners of the Bcl-2 family member were extracted from the human Integrated Interaction Database (IID).",
+                "prerequisite": [
+                    {
+                        "name": "Python (version 3.0 or higher) ",
+                        "uri": {
+                            "uri": "https://www.python.org/download/releases/3.0/",
+                            "filename": "extract_interaction_IID.py",
+                            "access_time": "2022-11-28T18:33:00-04.00",
+                        }
+                    }
+                ],
+                "input_list": [
+                    {
+                        "uri": "https://raw.githubusercontent.com/ELELAB/bcl_bh3only_breast_cancer/master/bcl2_protein_interactions/data/BCL2.queries.txt",
+                        "filename": "query_file",
+                        "access_time": "2022-11-28T18:33:00-04.00",
+                    }
+                ],
+                "output_list": [
+                    {
+                        "uri": "https://raw.githubusercontent.com/ELELAB/bcl_bh3only_breast_cancer/master/bcl2_protein_interactions/data/PPIs.txt",
+                        "filename": "ppi_file",
+                        "access_time": "2022-11-28T18:33:00-04.00",
+                    }
+                ]
+            },
+            {
+                "step_number": "2",
+                "name": "Filter the interaction partners to those containing the BH3 motif",
+                "description": "The IID of the Bcl-2 family member interaction partners was filtered to retain only those that include the BH3 motif. The candidates were first filtered from the IID database to give a list of the Bcl-2 family interaction partners. This list was then filtered down to possible interaction partners that contain the BH-3 motif. This list was filtered one last time to output a fasta file of the candidate protein sequences of the interaction partners containing the BH3 motif.",
+                "prerequisite": [
+                    {
+                        "name": "Python (version 3.0 or higher)",
+                        "uri": {
+                            "uri": "https://www.python.org/download/releases/3.0/",
+                            "filename": "find_bh3.py",
+                            "access_time": "2022-11-28T18:33:00-04.00"
+                        }
+                    }
+                ],
+                "input_list": [
+                    {
+                        "uri": "https://raw.githubusercontent.com/ELELAB/bcl_bh3only_breast_cancer/master/bcl2_protein_interactions/data/PPIs.txt",
+                        "filename": "ppi_file",
+                        "access_time": "2022-11-28T18:33:00-04.00"
+                    }
+                ],
+                "output_list": [
+                    {
+                        "uri": "https://raw.githubusercontent.com/ELELAB/bcl_bh3only_breast_cancer/master/bcl2_protein_interactions/output/bcl2.interactions.txt",
+                        "filename": "outfile_1",
+                        "access_time": "2022-11-28T19:03:00-04.00"
+                    },
+                    {
+                        "uri": "https://raw.githubusercontent.com/ELELAB/bcl_bh3only_breast_cancer/master/bcl2_protein_interactions/output/bh3.motif.candidate.genes.txt",
+                        "filename": "outfile_2",
+                        "access_time": "2022-11-28T19:03:00-04.00"",
+                     
+                    },
+                    {
+                        "uri": "https://raw.githubusercontent.com/ELELAB/bcl_bh3only_breast_cancer/master/bcl2_protein_interactions/output/candidate.genes.txt",
+                        "filename": "outfile_3",
+                        "access_time": "2022-11-28T19:03:00-04.00"",
+                        
+                    }
+                ]
+            }
+        ]
+    },
+    "execution_domain": {
+        "script": [
+            {
+                "uri": {
+                    "uri": "https://github.com/ELELAB/bcl_bh3only_breast_cancer/blob/master/bcl2_protein_interactions/extract_interaction_IID.py "
+                }
+            }
+        ],
+        "script_driver": "shell",
+        "software_prerequisites": [
+            {
+                "name": "Python",
+                "version": "3.0",
+                "uri": {
+                    "uri": "https://www.python.org/download/releases/3.0/"
+                }
+            }
+        ],
+        "external_data_endpoints": [
+            {
+                "name": "Integrated Interaction Database",
+                "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4702811/"
+            }
+        ]
+    },
+    "io_domain": {
+        "input_subdomain": [
+            {
+                "uri": {
+                    "uri": "https://raw.githubusercontent.com/ELELAB/bcl_bh3only_breast_cancer/master/bcl2_protein_interactions/data/BCL2.queries.txt",
+                    "filename": "query_file",
+                    "access_time": "2022-11-28T18:33:00-04.00"",
+                    
+                }
+            },
+            {
+                "uri": {
+                    "uri": "https://raw.githubusercontent.com/ELELAB/bcl_bh3only_breast_cancer/master/bcl2_protein_interactions/data/PPIs.txt",
+                    "filename": "ppi_file",
+                    "access_time": "2022-11-28T18:33:00-04.00"",
+                   
+                }
+            }
+        ],
+        "output_subdomain": [
+            {
+                "uri": {
+                    "uri": "https://raw.githubusercontent.com/ELELAB/bcl_bh3only_breast_cancer/master/bcl2_protein_interactions/output/bcl2.interactions.txt",
+                    "filename": "outfile_1",
+                    "access_time": "2022-11-28T19:03:00-04.00"",
+                    
+                },
+                "mediatype": "txt"
+            },
+            {
+                "uri": {
+                    "uri": "https://raw.githubusercontent.com/ELELAB/bcl_bh3only_breast_cancer/master/bcl2_protein_interactions/output/bh3.motif.candidate.genes.txt",
+                    "filename": "outfile_2",
+                    "access_time": "2022-11-28T19:03:00-04.00"",
+                    
+                },
+                "mediatype": "txt"
+            },
+            {
+                "uri": {
+                    "uri": "https://raw.githubusercontent.com/ELELAB/bcl_bh3only_breast_cancer/master/bcl2_protein_interactions/output/candidate.genes.txt",
+                    "filename": "outfile_3",
+                    "access_time": "2022-11-28T19:03:00-04.00"",
+                    
+                },
+                "mediatype": "txt"
+            }
+        ]
+    },
+    "parametric_domain": []
+}
